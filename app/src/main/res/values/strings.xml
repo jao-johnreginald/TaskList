@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Task List</string>
+    <string name="account_image">Account Image</string>
+    <string name="tasks_tab">Tasks Tab</string>
 </resources>
