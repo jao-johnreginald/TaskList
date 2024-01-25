@@ -1,4 +1,4 @@
-package com.johnreg.tasklist
+package com.johnreg.tasklist.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
