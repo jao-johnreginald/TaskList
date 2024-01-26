@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
+import com.johnreg.tasklist.data.TaskListDatabase
 import com.johnreg.tasklist.databinding.ActivityMainBinding
 import com.johnreg.tasklist.databinding.DialogAddTaskBinding
 
@@ -27,6 +28,8 @@ class MainActivity : AppCompatActivity() {
         }.attach()
 
         binding.fab.setOnClickListener { showAddTaskDialog() }
+
+        val database = TaskListDatabase.createDatabase(this)
     }
 
     private fun showAddTaskDialog() {
