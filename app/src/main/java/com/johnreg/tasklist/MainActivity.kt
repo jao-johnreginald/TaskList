@@ -8,9 +8,11 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
+import com.johnreg.tasklist.data.Task
 import com.johnreg.tasklist.data.TaskListDatabase
 import com.johnreg.tasklist.databinding.ActivityMainBinding
 import com.johnreg.tasklist.databinding.DialogAddTaskBinding
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,6 +32,21 @@ class MainActivity : AppCompatActivity() {
         binding.fab.setOnClickListener { showAddTaskDialog() }
 
         val database = TaskListDatabase.createDatabase(this)
+
+        val taskDao = database.getTaskDao()
+
+        thread {
+            taskDao.createTask(Task(
+                title = "hello task",
+                description = "description hello world",
+                isStarred = true
+            ))
+            val tasks = taskDao.getAllTasks()
+            runOnUiThread {
+                Toast.makeText(this, "Number of tasks: ${tasks.size}", Toast.LENGTH_LONG).show()
+            }
+        }
+
     }
 
     private fun showAddTaskDialog() {
