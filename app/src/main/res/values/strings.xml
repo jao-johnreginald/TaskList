@@ -3,4 +3,9 @@
     <string name="account_image">Account Image</string>
     <string name="tasks_tab">Tasks Tab</string>
     <string name="add">Add</string>
+    <string name="new_task_hint">New task</string>
+    <string name="add_details_hint">Add details</string>
+    <string name="add_details_button">Add Details</string>
+    <string name="star_task_button">Star Task</string>
+    <string name="save">Save</string>
 </resources>
