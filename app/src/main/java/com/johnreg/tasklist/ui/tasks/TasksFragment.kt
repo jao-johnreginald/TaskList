@@ -6,11 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.johnreg.tasklist.data.Task
+import com.johnreg.tasklist.data.TaskDao
+import com.johnreg.tasklist.data.TaskListDatabase
 import com.johnreg.tasklist.databinding.FragmentTasksBinding
+import kotlin.concurrent.thread
 
 class TasksFragment : Fragment() {
 
     private lateinit var binding: FragmentTasksBinding
+
+    private val taskDao: TaskDao by lazy {
+        val database = TaskListDatabase.createDatabase(requireContext())
+        database.getTaskDao()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,13 +31,13 @@ class TasksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerView.adapter = TasksAdapter(
-            tasks = listOf(
-                Task(title = "First task", description = "Barney is a dinosaur from our imagination"),
-                Task(title = "Second task", description = "And when he's tall"),
-                Task(title = "Third task", description = "He's what we call a dinosaur sensation")
-            )
-        )
+
+        thread {
+            val tasks = taskDao.getAllTasks()
+            requireActivity().runOnUiThread {
+                binding.recyclerView.adapter = TasksAdapter(tasks)
+            }
+        }
     }
 
 }
