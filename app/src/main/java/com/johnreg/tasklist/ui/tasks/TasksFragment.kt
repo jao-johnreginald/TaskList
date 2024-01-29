@@ -1,4 +1,4 @@
-package com.johnreg.tasklist
+package com.johnreg.tasklist.ui.tasks
 
 import android.os.Bundle
 import android.view.LayoutInflater

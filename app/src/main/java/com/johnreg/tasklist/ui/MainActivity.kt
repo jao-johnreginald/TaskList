@@ -1,4 +1,4 @@
-package com.johnreg.tasklist
+package com.johnreg.tasklist.ui
 
 import android.os.Bundle
 import android.view.View
@@ -13,6 +13,7 @@ import com.johnreg.tasklist.data.TaskDao
 import com.johnreg.tasklist.data.TaskListDatabase
 import com.johnreg.tasklist.databinding.ActivityMainBinding
 import com.johnreg.tasklist.databinding.DialogAddTaskBinding
+import com.johnreg.tasklist.ui.tasks.TasksFragment
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
