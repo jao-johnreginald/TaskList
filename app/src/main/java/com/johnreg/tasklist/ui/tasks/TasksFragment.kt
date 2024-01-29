@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.johnreg.tasklist.data.Task
 import com.johnreg.tasklist.databinding.FragmentTasksBinding
 
 class TasksFragment : Fragment() {
@@ -22,6 +23,13 @@ class TasksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.recyclerView.adapter = TasksAdapter(
+            tasks = listOf(
+                Task(title = "First task", description = "Barney is a dinosaur from our imagination"),
+                Task(title = "Second task", description = "And when he's tall"),
+                Task(title = "Third task", description = "He's what we call a dinosaur sensation")
+            )
+        )
     }
 
 }
