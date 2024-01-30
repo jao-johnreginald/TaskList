@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.johnreg.tasklist.data.Task
 import com.johnreg.tasklist.data.TaskDao
 import com.johnreg.tasklist.data.TaskListDatabase
 import com.johnreg.tasklist.databinding.FragmentTasksBinding
 import kotlin.concurrent.thread
 
-class TasksFragment : Fragment() {
+class TasksFragment : Fragment(), TasksAdapter.TaskUpdatedListener {
 
     private lateinit var binding: FragmentTasksBinding
 
@@ -38,8 +39,14 @@ class TasksFragment : Fragment() {
         thread {
             val tasks = taskDao.getAllTasks()
             requireActivity().runOnUiThread {
-                binding.recyclerView.adapter = TasksAdapter(tasks)
+                binding.recyclerView.adapter = TasksAdapter(tasks, this)
             }
+        }
+    }
+
+    override fun onTaskUpdated(task: Task) {
+        thread {
+            taskDao.updateTask(task)
         }
     }
 
