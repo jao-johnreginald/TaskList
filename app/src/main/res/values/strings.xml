@@ -8,4 +8,5 @@
     <string name="add_details_button">Add Details</string>
     <string name="star_task_button">Star Task</string>
     <string name="save">Save</string>
+    <string name="star_toggle">Star Toggle</string>
 </resources>
