@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Task::class], version = 1)
+@Database(entities = [Task::class], version = 2)
 abstract class TaskListDatabase : RoomDatabase() {
 
     abstract fun getTaskDao() : TaskDao
@@ -24,6 +24,10 @@ abstract class TaskListDatabase : RoomDatabase() {
             if (we don't have a database) { make one } else { return the existing one }
             Elvis operator - if it's not null, return left, otherwise, return right
             synchronized - do not allow this block of code to run on multiple threads
+
+            If you know you may be changing your database schema,
+            you can call .fallbackToDestructiveMigration() and whenever you change the database,
+            you increase the database version and this function will delete all data
              */
 
             return DATABASE_INSTANCE ?: synchronized(this) {
@@ -31,7 +35,7 @@ abstract class TaskListDatabase : RoomDatabase() {
                     context,
                     TaskListDatabase::class.java,
                     "task-list-database"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 DATABASE_INSTANCE = instance
                 instance
             }
