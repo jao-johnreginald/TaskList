@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.johnreg.tasklist.data.Task
 import com.johnreg.tasklist.data.TaskDao
 import com.johnreg.tasklist.data.TaskListDatabase
 import com.johnreg.tasklist.databinding.FragmentTasksBinding
@@ -16,7 +15,7 @@ class TasksFragment : Fragment() {
     private lateinit var binding: FragmentTasksBinding
 
     private val taskDao: TaskDao by lazy {
-        val database = TaskListDatabase.createDatabase(requireContext())
+        val database = TaskListDatabase.getDatabase(requireContext())
         database.getTaskDao()
     }
 
