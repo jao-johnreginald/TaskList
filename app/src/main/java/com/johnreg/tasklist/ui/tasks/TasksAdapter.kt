@@ -1,5 +1,6 @@
 package com.johnreg.tasklist.ui.tasks
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +25,12 @@ class TasksAdapter(private val tasks: List<Task>, private val listener: TaskUpda
     inner class ViewHolder(private val binding: ItemTaskBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(task: Task) {
+            binding.checkBox.isChecked = task.isComplete
+            binding.toggleStar.isChecked = task.isStarred
+            if (task.isComplete) {
+                binding.tvTitle.paintFlags = binding.tvTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                binding.tvDetails.paintFlags = binding.tvDetails.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }
             binding.tvTitle.text = task.title
             binding.tvDetails.text = task.description
 
